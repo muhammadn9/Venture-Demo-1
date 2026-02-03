@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchPad — Where Innovation Meets Capital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF7F2;
+            --charcoal: #1A1A1A;
+            --slate: #4A4A4A;
+            --accent: #C17C4D;
+            --border: #D4CFC4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            padding: 2rem 4rem;
+            background: var(--cream);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav a {
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            padding: 6rem 4rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.1;
+            max-width: 900px;
+            margin-bottom: 1.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--slate);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .filters {
+            padding: 3rem 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.75rem;
+            color: var(--slate);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            background: white;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .startups {
+            padding: 2rem 4rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .startup-card {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+            transition: opacity 0.3s;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .startup-card.hidden {
+            display: none;
+        }
+
+        .startup-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .startup-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 0.25rem;
+        }
+
+        .startup-category {
+            font-size: 0.85rem;
+            color: var(--slate);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .startup-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+
+        .startup-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--slate);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .view-btn {
+            padding: 0.875rem 2rem;
+            background: var(--charcoal);
+            color: var(--cream);
+            border: none;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            align-self: start;
+        }
+
+        .view-btn:hover {
+            background: var(--accent);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--slate);
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        @media (max-width: 968px) {
+            .startup-card {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            header, .hero, .filters, .startups {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">LaunchPad</div>
+            <nav>
+                <a href="#ventures">Ventures</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Discover Tomorrow's<br>Industry Leaders</h1>
+        <p class="subtitle">A curated platform connecting visionary startups with strategic venture capital partners.</p>
+    </section>
+
+    <section class="filters">
+        <div class="filter-grid">
+            <div class="filter-group">
+                <label>Industry</label>
+                <select id="industry-filter">
+                    <option value="">All Industries</option>
+                    <option value="fintech">FinTech</option>
+                    <option value="healthtech">HealthTech</option>
+                    <option value="ai">AI & Machine Learning</option>
+                    <option value="saas">SaaS</option>
+                    <option value="ecommerce">E-Commerce</option>
+                    <option value="cleantech">CleanTech</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Team Size</label>
+                <select id="team-filter">
+                    <option value="">Any Size</option>
+                    <option value="1-5">1-5 Members</option>
+                    <option value="6-10">6-10 Members</option>
+                    <option value="11-20">11-20 Members</option>
+                    <option value="20+">20+ Members</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Funding Stage</label>
+                <select id="stage-filter">
+                    <option value="">All Stages</option>
+                    <option value="pre-seed">Pre-Seed</option>
+                    <option value="seed">Seed</option>
+                    <option value="series-a">Series A</option>
+                    <option value="series-b">Series B</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Search</label>
+                <input type="text" id="search-filter" placeholder="Search startups...">
+            </div>
+        </div>
+    </section>
+
+    <section class="startups" id="startups-container">
+        <!-- Startup cards will be inserted here -->
+    </section>
+
+    <div class="no-results" id="no-results">No startups match your criteria</div>
+
+    <script>
+        const startups = [
+            {
+                name: "Neural Finance",
+                category: "fintech",
+                description: "AI-powered financial advisory platform democratizing wealth management for emerging markets with predictive analytics and automated portfolio optimization.",
+                team: "6-10",
+                stage: "seed",
+                funding: "$2.5M",
+                growth: "+340% YoY"
+            },
+            {
+                name: "MedChain",
+                category: "healthtech",
+                description: "Blockchain-based medical records system ensuring patient data privacy while enabling seamless healthcare provider collaboration across institutions.",
+                team: "11-20",
+                stage: "series-a",
+                funding: "$8M",
+                growth: "+210% YoY"
+            },
+            {
+                name: "Veridian AI",
+                category: "ai",
+                description: "Computer vision platform for manufacturing quality control, reducing defect rates through real-time anomaly detection and predictive maintenance.",
+                team: "1-5",
+                stage: "pre-seed",
+                funding: "$500K",
+                growth: "+180% YoY"
+            },
+            {
+                name: "CloudSync Pro",
+                category: "saas",
+                description: "Enterprise workflow automation tool streamlining cross-departmental operations with intelligent task routing and performance analytics.",
+                team: "6-10",
+                stage: "seed",
+                funding: "$3.2M",
+                growth: "+290% YoY"
+            },
+            {
+                name: "EcoMarket",
+                category: "ecommerce",
+                description: "Sustainable products marketplace connecting conscious consumers with verified eco-friendly brands, featuring carbon footprint tracking.",
+                team: "11-20",
+                stage: "series-a",
+                funding: "$12M",
+                growth: "+420% YoY"
+            },
+            {
+                name: "SolarGrid",
+                category: "cleantech",
+                description: "Distributed energy storage network optimizing renewable energy distribution through AI-driven grid management and peer-to-peer trading.",
+                team: "20+",
+                stage: "series-b",
+                funding: "$25M",
+                growth: "+150% YoY"
+            },
+            {
+                name: "PayFlow",
+                category: "fintech",
+                description: "Cross-border payment infrastructure for SMBs offering instant settlements, multi-currency support, and transparent fee structures.",
+                team: "11-20",
+                stage: "series-a",
+                funding: "$10M",
+                growth: "+380% YoY"
+            },
+            {
+                name: "HealthHub",
+                category: "healthtech",
+                description: "Telemedicine platform specializing in chronic disease management with AI-assisted diagnostics and integrated prescription services.",
+                team: "6-10",
+                stage: "seed",
+                funding: "$4M",
+                growth: "+265% YoY"
+            },
+            {
+                name: "DataWeave",
+                category: "ai",
+                description: "Natural language processing API enabling businesses to extract insights from unstructured data with industry-specific models.",
+                team: "1-5",
+                stage: "pre-seed",
+                funding: "$800K",
+                growth: "+220% YoY"
+            },
+            {
+                name: "TeamSpace",
+                category: "saas",
+                description: "Remote collaboration suite designed for distributed teams featuring virtual whiteboards, async video, and project management.",
+                team: "6-10",
+                stage: "seed",
+                funding: "$5.5M",
+                growth: "+310% YoY"
+            }
+        ];
+
+        function renderStartups(filteredStartups) {
+            const container = document.getElementById('startups-container');
+            const noResults = document.getElementById('no-results');
+            
+            container.innerHTML = '';
+            
+            if (filteredStartups.length === 0) {
+                noResults.classList.add('show');
+                return;
+            }
+            
+            noResults.classList.remove('show');
+            
+            filteredStartups.forEach((startup, index) => {
+                const card = document.createElement('div');
+                card.className = 'startup-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.innerHTML = `
+                    <div class="startup-meta">
+                        <div class="startup-name">${startup.name}</div>
+                        <div class="startup-category">${startup.category}</div>
+                    </div>
+                    <div class="startup-description">${startup.description}</div>
+                    <div class="startup-stats">
+                        <div class="stat">
+                            <span class="stat-label">Team Size</span>
+                            <span class="stat-value">${startup.team}</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Stage</span>
+                            <span class="stat-value">${startup.stage}</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Raised</span>
+                            <span class="stat-value">${startup.funding}</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Growth</span>
+                            <span class="stat-value">${startup.growth}</span>
+                        </div>
+                        <button class="view-btn">View Details</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterStartups() {
+            const industryFilter = document.getElementById('industry-filter').value.toLowerCase();
+            const teamFilter = document.getElementById('team-filter').value;
+            const stageFilter = document.getElementById('stage-filter').value;
+            const searchFilter = document.getElementById('search-filter').value.toLowerCase();
+
+            const filtered = startups.filter(startup => {
+                const matchesIndustry = !industryFilter || startup.category === industryFilter;
+                const matchesTeam = !teamFilter || startup.team === teamFilter;
+                const matchesStage = !stageFilter || startup.stage === stageFilter;
+                const matchesSearch = !searchFilter || 
+                    startup.name.toLowerCase().includes(searchFilter) ||
+                    startup.description.toLowerCase().includes(searchFilter);
+
+                return matchesIndustry && matchesTeam && matchesStage && matchesSearch;
+            });
+
+            renderStartups(filtered);
+        }
+
+        document.getElementById('industry-filter').addEventListener('change', filterStartups);
+        document.getElementById('team-filter').addEventListener('change', filterStartups);
+        document.getElementById('stage-filter').addEventListener('change', filterStartups);
+        document.getElementById('search-filter').addEventListener('input', filterStartups);
+
+        renderStartups(startups);
+    </script>
+</body>
+</html>
